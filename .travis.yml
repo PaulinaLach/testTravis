@@ -8,7 +8,7 @@ before_install:
   - tar xjvf waf-1.7.11.tar.bz2
   - cd waf-1.7.11
   - python waf-light configure
-  - python waf-light tools=boost,waf_unit_test
+  - python waf-light --tools=boost,waf_unit_test
   - chmod 755 waf
   - alias waf=$PWD/waf
   - cd ..
