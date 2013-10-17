@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+from waflib.Tools import waf_unit_test
+
+def build(bld):
+    #bld(features="cxx cxxshlib")
+    #lib_sources = bld.path.ant_glob('main/**/*.cpp')
+    #test_sources = bls.path.ant_glob('test/**/*.cpp')
+    #lib_tgt = bld.path.get_bld().make_node('../mylib')
+    bld.shlib(
+            source='main/lib.cpp',
+            target='mylib',
+            includes=['./main']
+            )
+    #bld.program(
+    #        source='main/main.cpp',
+    #        target='myexe',
+    #        includes=['./main'],
+    #        use='program_options mylib'
+    #        )
+    bld.program(
+            features='test',
+            source='test/test1.cpp',
+            target='test1',
+            includes=['./main', './test'],
+            use='BOOST mylib'
+            )
+    bld.program(
+            features='test',
+            source='test/test2.cpp',
+            target='test2',
+            includes=['./main', './test'],
+            use='BOOST mylib'
+            )
+    bld.add_post_fun(waf_unit_test.summary)
+
+    bld.add_post_fun(waf_unit_test.set_exit_code)

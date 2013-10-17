@@ -1,0 +1,10 @@
+nguage:
+  - cpp
+compiler:
+  - g++
+before_install:
+  - sudo apt-get install libboost-dev
+before_script:
+  - waf configure
+script:
+  - waf build
