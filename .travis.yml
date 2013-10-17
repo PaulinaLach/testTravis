@@ -10,7 +10,7 @@ before_install:
   - python waf-light configure
   - python waf-light --tools=boost,waf_unit_test
   - chmod 755 waf
-  - alias waf=$PWD/waf
+  - export PATH=$PWD:$PATH
   - cd ..
   - waf --version
 before_script:
