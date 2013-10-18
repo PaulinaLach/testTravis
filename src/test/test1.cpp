@@ -8,5 +8,5 @@ BOOST_AUTO_TEST_CASE( test1 )
 {
     BOOST_CHECK( method1(1) == 1 );        // SUCCESS
 
-    BOOST_REQUIRE( method1(2) ==  2 );      // FAIL
+    BOOST_REQUIRE( method1(2) == 42 );      // FAIL
 }
