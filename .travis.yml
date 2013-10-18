@@ -3,7 +3,7 @@ nguage:
 compiler:
   - g++
 before_install:
-  - sudo apt-get install libboost-dev
+  - sudo apt-get install libboost-test-dev
   - sudo apt-get install libboost-program-options-dev
   - wget http://waf.googlecode.com/files/waf-1.7.11.tar.bz2
   - tar xjvf waf-1.7.11.tar.bz2
