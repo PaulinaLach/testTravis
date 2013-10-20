@@ -14,7 +14,11 @@ before_install:
   - export PATH=$PWD:$PATH
   - cd ..
   - waf --version
+  - git clone https://github.com/nharraud/cpp-coveralls.git
+  - sudo pip install ./cpp-coveralls
 before_script:
   - waf configure
 script:
   - waf build
+after_success:
+  - coveralls --exclude src/test --gcov-options '\-\-relative-only' --build-root "./build"

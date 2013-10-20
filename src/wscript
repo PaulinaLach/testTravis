@@ -11,7 +11,8 @@ def build(bld):
     bld.shlib(
             source='main/lib.cpp',
             target='mylib',
-            includes=['./main']
+            includes=['./main'],
+            lib=['gcov'] #FIXME: should be only for tests
             )
     #bld.program(
     #        source='main/main.cpp',
@@ -24,14 +25,16 @@ def build(bld):
             source='test/test1.cpp',
             target='test1',
             includes=['./main', './test'],
-            use='BOOST mylib'
+            use='BOOST mylib',
+            lib=['gcov']
             )
     bld.program(
             features='test',
             source='test/test2.cpp',
             target='test2',
             includes=['./main', './test'],
-            use='BOOST mylib'
+            use='BOOST mylib',
+            lib=['gcov']
             )
     bld.add_post_fun(waf_unit_test.summary)
 
