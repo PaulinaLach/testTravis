@@ -21,4 +21,4 @@ before_script:
 script:
   - waf build
 after_success:
-  - coveralls --exclude src/test --build-root "./build"
+  - coveralls --exclude src/test --build-root "./build" -r "./build"
