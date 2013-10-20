@@ -24,3 +24,7 @@ after_success:
   - ls -laR ./build
   - coveralls --exclude src/test --build-root "./build" -r "./build"
   - ls -laR ./build
+  - cd build
+  - gcov --relative-only ./src/main/lib.cpp.1.o
+  - ls -laR .
+
