@@ -27,4 +27,7 @@ after_success:
   - cd build
   - gcov ./src/main/lib.cpp.1.o
   - ls -laR .
+  - cd src/main
+  - gcov lib.cpp.1.o
+  - ls -la
 
