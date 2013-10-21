@@ -21,13 +21,5 @@ before_script:
 script:
   - waf build
 after_success:
-  - ls -laR ./build
   - coveralls --exclude src/test --exclude waf-1.7.11 --build-root "./build"
-  - ls -laR ./build
-  - cd build
-  - gcov ./src/main/lib.cpp.1.o
-  - ls -laR .
-  - cd src/main
-  - gcov lib.cpp.1.o
-  - ls -la
 
