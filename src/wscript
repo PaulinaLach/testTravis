@@ -18,7 +18,8 @@ def build(bld):
             source='main/main.cpp',
             target='myexe',
             includes=['./main'],
-            use='BOOST mylib' #FIXME: should link only program_options and not boost::test
+            use='BOOST mylib', #FIXME: should link only program_options and not boost::test
+            lib=['gcov']
             )
     bld.program(
             features='test',
