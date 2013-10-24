@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/nharraud/testTravis.png?label=ready)](https://waffle.io/nharraud/testTravis)  
 testTravis
 ==========
 
