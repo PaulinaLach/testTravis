@@ -3,40 +3,62 @@
 
 from waflib.Tools import waf_unit_test
 
+def configure(conf):
+  conf.setenv('')
+  conf.check_boost()
+  #conf.check_boost(lib='program_options unit_test_framework', mt=True, static=False)
+  conf.env.append_value('LIB_BOOST_PROGRAM_OPTIONS', conf.boost_get_libs('program_options')[-1])
+  conf.env.append_value('LIB_BOOST_UNIT_TEST', conf.boost_get_libs('unit_test_framework')[-1])
+  #conf.check(compiler='cxx',lib='boost_unit_test_framework-mt',uselib_store='BOOST_UNIT_TEST')
+  #conf.check(compiler='cxx',lib='boost_program_options-mt',uselib_store='BOOST_PROGRAM_OPTIONS')
+
+
 def build(bld):
     #bld(features="cxx cxxshlib")
     #lib_sources = bld.path.ant_glob('main/**/*.cpp')
     #test_sources = bls.path.ant_glob('test/**/*.cpp')
     #lib_tgt = bld.path.get_bld().make_node('../mylib')
-    bld.shlib(
+    if (bld.variant == 'release'):
+        bld.shlib(
+            source='main/lib.cpp',
+            target='mylib',
+            includes=['./main']
+            )
+        bld.program(
+           source='main/main.cpp',
+           target='myexe',
+           includes=['./main'],
+           use='BOOST_PROGRAM_OPTIONS mylib'
+           )
+    elif (bld.variant == 'test'):
+        bld.shlib(
             source='main/lib.cpp',
             target='mylib',
             includes=['./main'],
-            lib=['gcov'] #FIXME: should be only for tests
-            )
-    bld.program(
-            source='main/main.cpp',
-            target='myexe',
-            includes=['./main'],
-            use='BOOST mylib', #FIXME: should link only program_options and not boost::test
             lib=['gcov']
             )
-    bld.program(
+        bld.program(
+           source='main/main.cpp',
+           target='myexe',
+           includes=['./main'],
+           use='BOOST_PROGRAM_OPTIONS mylib',
+           lib=['gcov']
+           )
+        bld.program(
             features='test',
             source='test/test1.cpp',
             target='test1',
             includes=['./main', './test'],
-            use='BOOST mylib',
+            use='BOOST_UNIT_TEST mylib',
             lib=['gcov']
             )
-    bld.program(
+        bld.program(
             features='test',
             source='test/test2.cpp',
             target='test2',
             includes=['./main', './test'],
-            use='BOOST mylib',
+            use='BOOST_UNIT_TEST mylib',
             lib=['gcov']
             )
-    bld.add_post_fun(waf_unit_test.summary)
-
-    bld.add_post_fun(waf_unit_test.set_exit_code)
+        bld.add_post_fun(waf_unit_test.summary)
+        bld.add_post_fun(waf_unit_test.set_exit_code)

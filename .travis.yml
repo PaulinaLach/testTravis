@@ -19,7 +19,7 @@ before_install:
 before_script:
   - waf configure
 script:
-  - waf build
+  - waf release test
 after_success:
-  - coveralls --exclude src/test --exclude waf-1.7.11 --build-root "./build"
+  - coveralls --exclude src/test --exclude waf-1.7.11 --exclude build/release --build-root "./build"
 
