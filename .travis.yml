@@ -1,8 +1,14 @@
-nguage:
+language:
   - cpp
 compiler:
   - g++
+
+env:
+    global:
+      - secure: "F8jQkjtGtgzM0PDfdF9Y9bDx5QGl7sREKotKRzkYSzj8KQhmo4Z/d+wMYNXK8DKb+QMH9DHHP3rH7fxrvtbKtZv8WzoJnF60yP0NYdchou8tvfWgRq77erhGYNKLHzvMUCEoSPYbM1Ethl5ZkSYdcCKd12Km0ZoHhuhRw2Cy0VQ="
+
 before_install:
+  - echo $TEST_VAR
   - sudo apt-get install libboost-test-dev
   - sudo apt-get install libboost-program-options-dev
   - wget http://waf.googlecode.com/files/waf-1.7.11.tar.bz2
